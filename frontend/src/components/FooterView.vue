@@ -1,267 +1,15 @@
-<style scoped>
-  b {
-    font-size: 16pt;
-    font-weight: bold;
-  }
-
-  i {
-    margin: 5px;
-  }
-
-  .footer {
-    max-height: 400px;
-    background: rgba(255, 255, 255, 0.3);
-    padding: 5px 0;
-    border-top: 3px solid rgba(204, 204, 204, 0.5);
-    font-size: 11pt;
-    overflow: hidden;
-  }
-
-  .footer .d-flex {
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-
-  .footer-info {
-    flex: 1;
-    padding: 10px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .footer-info h2 {
-    font-size: 16pt;
-    color: #222;
-    font-weight: bold;
-  }
-
-  .footer-info p {
-    font-size: 12pt;
-    color: #555;
-    margin-top: 5px;
-  }
-
-  .text-muted {
-    font-size: 12pt;
-    color: #6c757d;
-  }
-
-  .support-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: 2px solid #ffc107;
-    padding: 12px 20px;
-    border-radius: 10px;
-    background: #fffbe6;
-    box-shadow: 2px 2px 10px rgba(255, 193, 7, 0.3);
-    transition: all 0.3s ease;
-  }
-
-  .support-box:hover {
-    background: #ffecb3;
-    transform: scale(1.05);
-  }
-
-  .icon {
-    color: #ffc107;
-    font-size: 18px;
-  }
-
-  .footer-links {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .footer-link {
-    padding: 5px 0;
-    color: #555;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    font-size: 14pt;
-    font-weight: 500;
-    position: relative;
-  }
-
-  .footer-link:hover {
-    color: #555;
-    text-decoration: underline;
-  }
-
-  .footer-link::after {
-    content: '';
-    width: 0%;
-    height: 2px;
-    background: #555;
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: width 0.3s ease;
-  }
-
-  .footer-link:hover::after {
-    width: 100%;
-  }
-
-  .footer-bottom {
-    text-align: center;
-    padding: 10px 0;
-    border-top: 1px solid #ddd;
-    margin-top: 20px;
-    font-size: 12pt;
-    color: #6c757d;
-  }
-
-  .modal {
-    z-index: 1050;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .modal-dialog {
-    max-width: 700px;
-    width: 100%;
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  .modal-content {
-    border-radius: 12px;
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.4);
-    background: white;
-  }
-
-  .modal-header {
-    background-color: #f8f9fa;
-    border-bottom: 3px solid #ccc;
-    border-radius: 12px 12px 0 0;
-    padding: 18px;
-  }
-
-  .modal-title {
-    font-size: 18pt;
-    font-weight: bold;
-    color: #343a40;
-  }
-
-  .btn-close {
-    font-size: 18px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .btn-close:hover {
-    transform: rotate(90deg);
-  }
-
-  .modal-body {
-    padding: 20px;
-    font-size: 14pt;
-    color: #444;
-  }
-
-  .modal-footer {
-    border-top: 2px solid #ddd;
-    padding: 15px;
-    border-radius: 0 0 12px 12px;
-  }
-
-  .modal-backdrop {
-    z-index: 1040;
-    background-color: rgba(0, 0, 0, 0.5);
-    animation: fadeIn 0.3s ease-in-out;
-  }
-
-  @media (max-width: 768px) {
-    .footer {
-      padding: 15px 0;
-    }
-
-    .footer .d-flex {
-      text-align: center;
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .footer-info h2 {
-      font-size: 17pt;
-    }
-
-    .support-box {
-      justify-content: center;
-      width: 100%;
-      max-width: 350px;
-      margin: 0 auto;
-    }
-
-    .footer-links {
-      align-items: center;
-    }
-
-    .footer-link {
-      font-size: 14pt;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .footer-info h2 {
-      font-size: 15pt;
-    }
-
-    .footer-info p {
-      font-size: 13pt;
-    }
-
-    .support-box {
-      flex-direction: column;
-      text-align: center;
-      padding: 12px;
-    }
-
-    .footer-bottom {
-      font-size: 12pt;
-    }
-  }
-
-  /* ----- Hiệu ứng xuất hiện ----- */
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .modal {
-    z-index: 1050 !important;
-  }
-
-  .modal-backdrop {
-    z-index: 1040 !important;
-  }
-</style>
-
 <template>
-  <footer class="container-fluid max-w-1280 mt-5 footer">
+  <footer class="container-fluid footer">
     <div class="d-flex flex-column flex-lg-row justify-content-between gap-4">
       <div class="footer-info ps-lg-5">
-        <h2 class="fw-bold mb-0 text-muted">Hệ Thống Quản Lý Mượn Sách</h2>
-        <p class="text-muted opacity-75">
-          Hỗ trợ độc giả trong việc đăng ký và quản lý mượn sách trực tuyến một
-          cách thuận tiện.
+        <h2 class="fw-bold mb-0">Hệ Thống Quản Lý Mượn Sách</h2>
+        <p class="text-muted">
+          Đăng ký và quản lý mượn sách online 24/7.
         </p>
       </div>
     </div>
 
-    <div class="container max-w-1280 mx-auto px-0 px-lg-1">
+    <div class="container mx-auto px-0 px-lg-1">
       <div class="row">
         <div class="col-4 ps-lg-5 text-center text-lg-start">
           <div class="fw-bold fs-4">
@@ -274,16 +22,7 @@
           </div>
           <div class="text-muted my-3">
             <i class="bi bi-envelope"></i>
-            phatb2207554@student.ctu.edu.vn
-          </div>
-          <div>
-            <div class="support-box">
-              <i class="bi bi-telephone fs-4 icon"></i>
-              <div>
-                <span class="text-muted">Hỗ trợ độc giả 24/7</span>
-                <div class="fw-semibold fs-5">0862 974 822</div>
-              </div>
-            </div>
+            Công Nghệ Thông Tin và Truyền Thông
           </div>
         </div>
 
@@ -315,7 +54,7 @@
           <b>Social</b>
           <div class="footer-links">
             <a
-              href="https://www.facebook.com/nguyen.phat.602822"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               class="footer-link"
@@ -324,31 +63,13 @@
               Facebook
             </a>
             <a
-              href="https://www.instagram.com/ngpat_207/"
+              href="/"
               target="_blank"
               rel="noopener noreferrer"
               class="footer-link"
             >
               <i class="bi bi-instagram"></i>
               Instagram
-            </a>
-            <a
-              href="https://github.com/Npp204"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="footer-link"
-            >
-              <i class="bi bi-github"></i>
-              GitHub
-            </a>
-            <a
-              href="https://www.threads.net/@ngpat_207"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="footer-link"
-            >
-              <i class="bi bi-threads"></i>
-              Threads
             </a>
           </div>
         </div>
@@ -465,12 +186,169 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {
-        showDieuKhoan: false,
-        showHuongDan: false
-      }
-    }
+export default {
+  data() {
+    return {
+      showDieuKhoan: false,
+      showHuongDan: false
+    };
   }
+};
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.footer {
+  background-color: #1E3A8A;
+  padding: 24px 0;
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.footer-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.footer-info p {
+  font-size: 14px;
+  color: #D1D5DB;
+}
+
+.text-muted {
+  font-size: 14px;
+  color: #D1D5DB;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-link {
+  font-size: 14px;
+  font-weight: 500;
+  color: #D1D5DB;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-link:hover {
+  color: #60A5FA;
+}
+
+.footer-bottom {
+  text-align: center;
+  padding: 12px 0;
+  border-top: 1px solid #4B5EAA;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #D1D5DB;
+}
+
+.modal-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  background-color: #FFFFFF;
+}
+
+.modal-header {
+  background-color: #F3F4F6;
+  border-bottom: 1px solid #D1D5DB;
+  padding: 16px;
+}
+
+.modal-title {
+  font-family: 'Inter', sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  color: #1E3A8A;
+}
+
+.btn-close {
+  font-size: 16px;
+  transition: opacity 0.2s;
+}
+
+.btn-close:hover {
+  opacity: 0.7;
+}
+
+.modal-body {
+  padding: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+.modal-body p {
+  margin-bottom: 12px;
+}
+
+.modal-footer {
+  border-top: 1px solid #D1D5DB;
+  padding: 12px;
+}
+
+.btn-secondary {
+  background-color: #6B7280;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: #FFFFFF;
+  transition: background-color 0.2s;
+}
+
+.btn-secondary:hover {
+  background-color: #4B5563;
+}
+
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 20px 0;
+  }
+
+  .footer .d-flex {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .footer-info h2 {
+    font-size: 18px;
+  }
+
+  .footer-links {
+    align-items: center;
+  }
+
+  .footer-link {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-info h2 {
+    font-size: 16px;
+  }
+
+  .footer-info p {
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    font-size: 13px;
+  }
+}
+</style>
