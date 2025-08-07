@@ -1,100 +1,6 @@
-<style scoped>
-.borrow-container {
-  max-width: 800px;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
-  background: #f8f9fa;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-h2 {
-  color: #5a4631;
-}
-
-button {
-  margin: 10px;
-  padding: 10px 15px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn-add {
-  background-color: #b89e25;
-  color: white;
-}
-
-.btn-add:hover {
-  background-color: #e2bc13;
-}
-
-.btn-success {
-  background-color: #28a745;
-  color: white;
-}
-
-.btn-success:hover {
-  background-color: #218838;
-}
-
-.btn-danger {
-  background-color: #dc3545;
-  color: white;
-}
-
-.btn-danger:hover {
-  background-color: #c82333;
-}
-
-.borrow-form {
-  background: white;
-  padding: 15px;
-  margin-top: 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-label {
-  font-weight: bold;
-  display: block;
-  margin-top: 10px;
-}
-
-select, input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  background: #e9ecef;
-  padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-li button {
-  font-size: 14px;
-}
-</style>
-
 <template>
   <div class="borrow-container">
-    <h2> Đăng Ký Mượn Sách</h2>
+    <h2>Đăng Ký Mượn Sách</h2>
 
     <button class="btn btn-add" @click="showBorrowForm = true">
       Thêm Phiếu Mượn
@@ -227,3 +133,130 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.borrow-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  text-align: center;
+  background: #F3F4F6;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  color: #1E3A8A;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+button {
+  margin: 10px;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.btn-add {
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+}
+
+.btn-add:hover {
+  background-color: #1E40AF;
+}
+
+.btn-success {
+  background-color: #28A745;
+  color: #FFFFFF;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-danger {
+  background-color: #DC3545;
+  color: #FFFFFF;
+}
+
+.btn-danger:hover {
+  background-color: #C82333;
+}
+
+.btn-secondary {
+  background-color: #6C757D;
+  color: #FFFFFF;
+}
+
+.btn-secondary:hover {
+  background-color: #5A6268;
+}
+
+.btn-cancel {
+  background-color: #6C757D;
+  color: #FFFFFF;
+}
+
+.btn-cancel:hover {
+  background-color: #5A6268;
+}
+
+.borrow-form {
+  background: #FFFFFF;
+  padding: 15px;
+  margin-top: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-weight: 500;
+  display: block;
+  margin-top: 15px;
+  font-family: 'Inter', sans-serif;
+  color: #374151;
+}
+
+select, input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #E5E7EB;
+  padding: 12px;
+  margin: 8px 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+li button {
+  font-size: 14px;
+}
+</style>
