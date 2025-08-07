@@ -1,23 +1,3 @@
-<style scoped>
-  h2 {
-    color: #b89e25;
-  }
-
-  button {
-    background-color: #b89e25;
-    color: white;
-    border: none;
-  }
-
-  button:hover {
-    background-color: #e2bc13;
-  }
-
-  span {
-    color: #b89e25;
-  }
-</style>
-
 <template>
   <div class="container d-flex flex-column justify-content-center align-items-center vh-50 mt-5">
     <div class="card p-3 shadow-sm w-100" style="max-width: 400px;">
@@ -75,3 +55,42 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+h2 {
+  color: #1E3A8A;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+button {
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+  border: none;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+button:hover {
+  background-color: #1E40AF;
+}
+
+span {
+  color: #1E3A8A;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.card {
+  background-color: #FFFFFF;
+  border-radius: 12px;
+  padding: 20px;
+}
+</style>

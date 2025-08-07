@@ -1,83 +1,4 @@
-<style scoped>
-  .table {
-    margin-top: 10px;
-    text-align: center;
-  }
-  th,
-  td {
-    vertical-align: middle;
-  }
-
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 15px;
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-  }
-
-  .pagination button {
-    padding: 8px 12px;
-    margin: 5px;
-    border: none;
-    background: #b89e25;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  .pagination button:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-  }
-
-  .pagination span {
-    margin: 15px;
-  }
-  
-  .page-size {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .page-size label {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-
-  .page-size select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    background: #fff;
-    cursor: pointer;
-  }
-
-  .page-size span {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-</style>
-
 <template>
-  <div class="page-size mb-2">
-    <label for="pageSize">Hiển thị:</label>
-    <select v-model="perPage" id="pageSize">
-      <option value="5">5</option>
-      <option value="10">10</option>
-      <option value="20">20</option>
-    </select>
-    <span>sách / trang</span>
-  </div>
 
   <div>
     <table class="table table-bordered">
@@ -135,60 +56,151 @@
 </template>
 
 <script>
-  export default {
-    props: {
-      books: { type: Array, required: true },
-      nxbs: { type: Array, required: true }
+export default {
+  props: {
+    books: { type: Array, required: true },
+    nxbs: { type: Array, required: true }
+  },
+  data() {
+    return {
+      currentPage: 1,
+      perPage: 10
+    }
+  },
+  computed: {
+    totalPages() {
+      return Math.ceil(this.books.length / this.perPage)
     },
-    data() {
-      return {
-        currentPage: 1,
-        perPage: 10
-      }
+    paginatedBooks() {
+      const start = (this.currentPage - 1) * this.perPage
+      return this.books.slice(start, start + this.perPage)
+    }
+  },
+  emits: ['edit', 'delete'],
+  methods: {
+    prevPage() {
+      if (this.currentPage > 1) this.currentPage--
     },
-    computed: {
-      totalPages() {
-        return Math.ceil(this.books.length / this.perPage)
-      },
-      paginatedBooks() {
-        const start = (this.currentPage - 1) * this.perPage
-        return this.books.slice(start, start + this.perPage)
-      }
+    nextPage() {
+      if (this.currentPage < this.totalPages) this.currentPage++
     },
-    emits: ['edit', 'delete'],
-    methods: {
-      prevPage() {
-        if (this.currentPage > 1) this.currentPage--
-      },
-      nextPage() {
-        if (this.currentPage < this.totalPages) this.currentPage++
-      },
-      getNXBName(book) {
-        if (!book || !book.MANXB) return 'Chưa có NXB'
+    getNXBName(book) {
+      if (!book || !book.MANXB) return 'Chưa có NXB'
 
-        const manxb =
-          typeof book.MANXB === 'object' ? book.MANXB.MANXB : book.MANXB
+      const manxb =
+        typeof book.MANXB === 'object' ? book.MANXB.MANXB : book.MANXB
 
-        const nxb = this.nxbs.find(
-          n =>
-            n.MANXB === manxb ||
-            n._id === manxb ||
-            String(n._id) === String(manxb)
-        )
-        return nxb ? nxb.TENNXB : 'Không tìm thấy'
-      },
-      formatCurrency(value) {
-        if (value == null || isNaN(value)) return 'Không có giá'
-        return new Intl.NumberFormat('vi-VN', {
-          style: 'currency',
-          currency: 'VND'
-        }).format(value)
-      }
+      const nxb = this.nxbs.find(
+        n =>
+          n.MANXB === manxb ||
+          n._id === manxb ||
+          String(n._id) === String(manxb)
+      )
+      return nxb ? nxb.TENNXB : 'Không tìm thấy'
     },
-    watch: {
-      perPage() {
-        this.currentPage = 1
-      }
+    formatCurrency(value) {
+      if (value == null || isNaN(value)) return 'Không có giá'
+      return new Intl.NumberFormat('vi-VN', {
+        style: 'currency',
+        currency: 'VND'
+      }).format(value)
+    }
+  },
+  watch: {
+    perPage() {
+      this.currentPage = 1
     }
   }
+}
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+.table {
+  margin-top: 15px;
+  text-align: center;
+}
+
+th,
+td {
+  vertical-align: middle;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+th {
+  background-color: #F3F4F6;
+  font-weight: 500;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  padding: 10px 15px;
+  margin: 5px;
+  border: none;
+  background: #1E3A8A;
+  color: #FFFFFF;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.2s ease-in-out;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.pagination button:disabled {
+  background: #D1D5DB;
+  cursor: not-allowed;
+}
+
+.pagination span {
+  margin: 15px;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+.page-size {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.page-size label {
+  margin-right: 12px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #1E3A8A;
+}
+
+.page-size select {
+  padding: 6px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #FFFFFF;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-size span {
+  margin-left: 12px;
+  font-size: 14px;
+  color: #555;
+  font-family: 'Inter', sans-serif;
+}
+</style>

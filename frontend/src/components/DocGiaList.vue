@@ -1,126 +1,9 @@
-<style scoped>
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-    color: #b89e25;
-  }
-
-  .docgia-list {
-    padding: 20px;
-  }
-
-  .page-size {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  th,
-  td {
-    border: 1px solid #bcb6b6;
-    padding: 8px;
-    text-align: left;
-  }
-
-  th {
-    background: #f4f4f4;
-  }
-
-  th:last-child,
-  td:last-child {
-    width: 120px;
-    text-align: center;
-    padding: 5px;
-  }
-
-  .delete-btn {
-    background: #f44336;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    cursor: pointer;
-    border-radius: 5px;
-  }
-
-  .pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 15px;
-    gap: 10px;
-  }
-
-  .pagination button {
-    padding: 5px 10px;
-    border: none;
-    background-color: #b89e25;
-    color: white;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-
-  .pagination button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-  }
-  .page-size {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    margin-bottom: 10px;
-    font-size: 16px;
-  }
-
-  .page-size label {
-    margin-right: 10px;
-    font-weight: bold;
-  }
-
-  .page-size select {
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 14px;
-    background: #fff;
-    cursor: pointer;
-  }
-
-  .page-size span {
-    margin-left: 10px;
-    font-size: 14px;
-    color: #555;
-  }
-
-  button:hover {
-    opacity: 0.8;
-  }
-</style>
-
 <template>
   <div class="docgia-list">
     <h2>Danh sách độc giả</h2>
 
     <InputSearch v-model="search" />
 
-    <div class="page-size mb-2">
-      <label for="pageSize">Hiển thị:</label>
-      <select v-model="perPage" id="pageSize">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-      </select>
-      <span>độc giả / trang</span>
-    </div>
 
     <table>
       <thead>
@@ -161,56 +44,188 @@
 </template>
 
 <script>
-  import InputSearch from '@/components/InputSearch.vue'
-  export default {
-    components: { InputSearch },
-    props: {
-      docGias: { type: Array, required: true }
-    },
-    data() {
-      return {
-        currentPage: 1,
-        perPage: 5,
-        search: ''
-      }
-    },
-    computed: {
-      filteredDocGias() {
-        const keyword = this.search.toLowerCase().trim()
-        return this.docGias.filter(docgia => {
-          const hoTen = `${docgia.HOLOT} ${docgia.TEN}`.toLowerCase()
-          const soDienThoai = docgia.SODIENTHOAI
-            ? docgia.SODIENTHOAI.toLowerCase()
-            : ''
+import InputSearch from '@/components/InputSearch.vue'
+export default {
+  components: { InputSearch },
+  props: {
+    docGias: { type: Array, required: true }
+  },
+  data() {
+    return {
+      currentPage: 1,
+      perPage: 5,
+      search: ''
+    }
+  },
+  computed: {
+    filteredDocGias() {
+      const keyword = this.search.toLowerCase().trim()
+      return this.docGias.filter(docgia => {
+        const hoTen = `${docgia.HOLOT} ${docgia.TEN}`.toLowerCase()
+        const soDienThoai = docgia.SODIENTHOAI
+          ? docgia.SODIENTHOAI.toLowerCase()
+          : ''
 
-          return hoTen.includes(keyword) || soDienThoai.includes(keyword)
-        })
-      },
-      totalPages() {
-        return Math.ceil(this.docGias.length / this.perPage)
-      },
-      paginatedDocGias() {
-        const start = (this.currentPage - 1) * this.perPage
-        const end = start + this.perPage
-        return this.filteredDocGias.slice(start, end)
+        return hoTen.includes(keyword) || soDienThoai.includes(keyword)
+      })
+    },
+    totalPages() {
+      return Math.ceil(this.docGias.length / this.perPage)
+    },
+    paginatedDocGias() {
+      const start = (this.currentPage - 1) * this.perPage
+      const end = start + this.perPage
+      return this.filteredDocGias.slice(start, end)
+    }
+  },
+  methods: {
+    prevPage() {
+      if (this.currentPage > 1) {
+        this.currentPage--
       }
     },
-    methods: {
-      prevPage() {
-        if (this.currentPage > 1) {
-          this.currentPage--
-        }
-      },
-      nextPage() {
-        if (this.currentPage < this.totalPages) {
-          this.currentPage++
-        }
-      }
-    },
-    watch: {
-      perPage() {
-        this.currentPage = 1
+    nextPage() {
+      if (this.currentPage < this.totalPages) {
+        this.currentPage++
       }
     }
+  },
+  watch: {
+    perPage() {
+      this.currentPage = 1
+    }
   }
+}
 </script>
+
+<style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  color: #1E3A8A;
+  font-weight: 600;
+}
+
+.docgia-list {
+  padding: 20px;
+}
+
+.page-size {
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #FFFFFF;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th,
+td {
+  border: 1px solid #E5E7EB;
+  padding: 12px;
+  text-align: left;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: #374151;
+}
+
+th {
+  background: #F3F4F6;
+  font-weight: 500;
+}
+
+th:last-child,
+td:last-child {
+  width: 150px;
+  text-align: center;
+  padding: 8px;
+}
+
+.delete-btn {
+  background: #DC3545;
+  color: #FFFFFF;
+  border: none;
+  padding: 6px 12px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  opacity: 0.9;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.pagination button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #1E3A8A;
+  color: #FFFFFF;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+}
+
+.pagination button:disabled {
+  background-color: #D1D5DB;
+  cursor: not-allowed;
+}
+
+.page-size {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.page-size label {
+  margin-right: 12px;
+  font-weight: 500;
+  font-family: 'Inter', sans-serif;
+  color: #1E3A8A;
+}
+
+.page-size select {
+  padding: 6px 12px;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 14px;
+  background: #FFFFFF;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+}
+
+.page-size span {
+  margin-left: 12px;
+  font-size: 14px;
+  color: #555;
+  font-family: 'Inter', sans-serif;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+</style>
