@@ -4,15 +4,6 @@
 
     <InputSearch v-model="search" />
 
-    <div class="page-size mb-2">
-      <label for="pageSize">Hiển thị:</label>
-      <select v-model="perPage" id="pageSize">
-        <option value="5">5</option>
-        <option value="10">10</option>
-        <option value="20">20</option>
-      </select>
-      <span>phiếu / trang</span>
-    </div>
 
     <table class="table table-bordered">
       <thead>
